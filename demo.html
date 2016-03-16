@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body ng-app="demoApp" ng-controller="demoCtrl">
+
+
+    <input id="demo" class="Wdate" type="text" wdate-picker readOnly="true" ng-model="oneDate" maxdate="{{anotherDate}}" />
+
+
+
+    <input id="demo2" class="Wdate" type="text" wdate-picker readOnly="true" ng-model="anotherDate" mindate="{{oneDate}}" />
+
+
+    <div>{{oneDate}}</div>
+
+    <div>{{anotherDate}}</div>
+    <script src="WdatePicker.js"></script>
+    <script src="http://libs.useso.com/js/angular.js/1.2.9/angular.min.js"></script>
+    <script src="ng-WdatePicker.js"></script>
+    <script>
+    (function() {
+        var demoApp = angular.module('demoApp', ['ng-WdatePicker']);
+        demoApp.controller('demoCtrl', function($scope) {
+             $scope.oneDate = "2016-03-11 12:55:55"
+             $scope.anotherDate = "2016-03-23 12:55:55"
+
+        })
+    })();
+    </script>
+</body>
+
+</html>

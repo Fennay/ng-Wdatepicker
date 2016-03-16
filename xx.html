@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body ng-app="demoApp" ng-controller="demoCtrl">
+
+
+
+    <input id="demo" class="Wdate" type="text" date-picker readOnly="true" ng-model="myDate" maxdate="{{myDate222}}"/>
+
+
+
+    <input id="demo2" class="Wdate" type="text" date-picker readOnly="true" ng-model="myDate222" mindate="{{myDate}}" />
+    <br>
+    <!-- <input id="demo" class="Wdate" type="text" date-picker date-format="" readOnly="true" ng-model="myDate222" /> -->{{myDate}}
+    <br>{{myDate222}}
+    <script src="WdatePicker.js"></script>
+    <script src="http://libs.useso.com/js/angular.js/1.2.9/angular.min.js"></script>
+    <script>
+    (function() {
+        var demoApp = angular.module('demoApp', []);
+        demoApp.controller('demoCtrl', function($scope) {
+            // $scope.myDate = "2016-03-11 12:55:55"
+            // $scope.myDate222 = "2016-03-13 12:55:55"
+        })
+        demoApp.directive('datePicker', function() {
+            return {
+                restrict: 'A',
+                require: 'ngModel',
+                link: function(scope, element, attr, ngModel) {
+
+
+                    element.val(ngModel.$viewValue);
+
+
+                    function onpicking(dp) {
+                        // var date = dp.cal.getNewDateStr();
+                        // scope.$apply(function() {
+                        //     ngModel.$setViewValue(date);
+                        // });
+                        //
+                    }
+
+                    function onpicked(dp) {
+                        // $(dp.el).validationEngine('validate');
+                        var date = dp.cal.getNewDateStr();
+                        scope.$apply(function() {
+                            ngModel.$setViewValue(date);
+                        });
+                    }
+
+                    function oncleared() {
+                        scope.$apply(function() {
+                            ngModel.$setViewValue("");
+                        });
+                    }
+
+
+                    element.bind('click focus', function() {
+
+                        var config = {
+                            onpicking: onpicking,
+                            oncleared: oncleared,
+                            onpicked: onpicked,
+                            dateFmt: attr.datefmt || 'yyyy-MM-dd HH:mm:ss',
+                            // minDate: attr.mindate || '%y-%M-%d {%H-20}:%m:%s',
+                            // maxDate: attr.maxdate || null
+                        };
+
+
+
+                        if (attr.mindate) {
+                            config.minDate = attr.mindate;
+                        }else {
+                           config.minDate = '%y-%M-%d %H:%m:%s';
+                        }
+
+                        if (attr.maxdate) {
+                            config.maxDate = attr.maxdate;
+                        } else {
+                            config.maxDate = '2099-12-30 00:00:00';
+                        }
+
+
+                        console.log('attr.minDate:' + attr.mindate)
+                        console.log('attr.maxDate:' + attr.maxdate)
+
+                        console.log('config.minDate:' +config.minDate)
+                        console.log('config.maxDate:' +config.maxDate)
+
+                        console.log(222222)
+                        WdatePicker(config)
+                    });
+                }
+            };
+        });
+    })();
+    </script>
+</body>
+
+</html>
