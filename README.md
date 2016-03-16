@@ -19,6 +19,6 @@
 
 ## More
 
+<a href="http://padding.me/ng-Wdatepicker/"> DEMO</a>
 
-DEMO:
 
