@@ -3,10 +3,7 @@
  * @author: PaddingMe
  * @version: 0.0.1, 2016-03-16
  */
-// (function(angular) {
-
-//     'use strict';
-
+(function(angular,WdatePicker) {
 
     angular.module('ng-WdatePicker', [])
         .directive('wdatePicker', wdatePicker);
@@ -34,7 +31,6 @@
             }
 
             function onpicked(dp) {
-                // $(dp.el).validationEngine('validate');
                 var date = dp.cal.getNewDateStr();
                 scope.$apply(function() {
                     ngModel.$setViewValue(date);
@@ -55,8 +51,6 @@
                     oncleared: oncleared,
                     onpicked: onpicked,
                     dateFmt: attr.datefmt || 'yyyy-MM-dd HH:mm:ss',
-                    // minDate: attr.mindate || '%y-%M-%d {%H-20}:%m:%s',
-                    // maxDate: attr.maxdate || null
                 };
 
 
@@ -74,13 +68,6 @@
                 }
 
 
-                console.log('attr.minDate:' + attr.mindate)
-                console.log('attr.maxDate:' + attr.maxdate)
-
-                console.log('config.minDate:' + config.minDate)
-                console.log('config.maxDate:' + config.maxDate)
-
-                console.log(222222)
                 WdatePicker(config)
             });
         }
@@ -88,4 +75,4 @@
 
 
 
-// })(angular);
+})(angular,window.WdatePicker);
